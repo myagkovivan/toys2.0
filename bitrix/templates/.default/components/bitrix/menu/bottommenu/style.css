@@ -1,0 +1,12 @@
+.footer a:link,
+.footer a:visited,
+.footer a:hover,
+.footer a:active{
+	color:white;
+}
+.footer li{
+height: 20px;
+	padding:2px 2px;
+	float: left;
+	font-size: 16px;
+}
