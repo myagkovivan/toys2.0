@@ -1,0 +1,42 @@
+.top-menu a:link,
+.top-menu a:visited,
+.top-menu a:hover,
+.top-menu a:active{
+	color:white;
+}
+.top-menu{
+	height: 42px;
+	width: 1080px;
+	margin: 0;
+	padding: 0;
+	display:inline-block;
+	list-style: none;
+}
+
+.top-menu li{
+	padding:10px 5px;
+	float: left;
+	margin-right: -0.2em;
+}
+.top-menu li:after{
+	content: "";
+	display: inline-block;
+	clear: both;
+}
+
+.top-menu a{
+	padding: 10px 5px;
+	margin-left:35px;
+	font-size: 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+
+}
+.header-menu a:hover{
+	 background:white;
+	 color: #24b6ab;
+ }
+.header-menu a.actived{
+	background:white;
+	color: #24b6ab;
+}
