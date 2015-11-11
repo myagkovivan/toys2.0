@@ -175,17 +175,5 @@ background: #139086;
 margin-top: 30px; 
     color: white;
 }
-.footer a:link,
-.footer a:visited,
-.footer a:hover,
-.footer a:active{
-color:white;
-}
-.footer li{
-    list-style-type:none;
-padding:3px 5px;
-float: left;
-font-size: 18px;
-}
 #da-slider{ box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }

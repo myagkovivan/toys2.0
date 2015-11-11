@@ -3,13 +3,27 @@
 </div>
 
 <div class="footer">
-    <ul class="bottom-menu">
-        <li><a href="#"><strong>Каталог</a></li>
-        <li><a href="#"><strong>Оплата и доставка</a></li>
-        <li><a href="#"><strong>Гарантия</a></li>
-        <li><a href="#"><strong>О нас</a></li>
-        <li><a href="#"><strong>Контакты</a></li>
-    </ul>
+    <?
+    $APPLICATION->IncludeComponent(
+        "bitrix:menu",
+        "bottommenu",
+        array(
+            "ROOT_MENU_TYPE" => "top",
+            "MENU_CACHE_TYPE" => "A",
+            "MENU_CACHE_TIME" => "3600",
+            "MENU_CACHE_USE_GROUPS" => "Y",
+            "MENU_CACHE_GET_VARS" => array(
+            ),
+            "MAX_LEVEL" => "1",
+            "CHILD_MENU_TYPE" => "left",
+            "USE_EXT" => "N",
+            "DELAY" => "N",
+            "ALLOW_MULTI_SELECT" => "N",
+            "COMPONENT_TEMPLATE" => "topmenu"
+        ),
+        false
+    );
+    ?>
 <div class="year" >
 <?php echo date("Y")?>
 	</div>
