@@ -11,8 +11,7 @@ foreach($arResult as $arItem):
 	<?else:?>
 		<li><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
 	<?endif?>
-	
-<?endforeach?>
+	<?endforeach?>
 
 
 <?endif?>
