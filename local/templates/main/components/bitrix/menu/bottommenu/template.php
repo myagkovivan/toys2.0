@@ -5,7 +5,7 @@
 foreach($arResult as $arItem):
 	if($arParams["MAX_LEVEL"] == 1 && $arItem["DEPTH_LEVEL"] > 1) 
 		continue;
-?>
+?><div class="bottom">
 	<?if($arItem["SELECTED"]):?>
 		<li><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
 	<?else:?>
@@ -14,4 +14,4 @@ foreach($arResult as $arItem):
 	<?endforeach?>
 
 
-<?endif?>
+<?endif?></div>

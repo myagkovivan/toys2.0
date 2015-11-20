@@ -441,6 +441,7 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']) && !empty($arResul
 	unset($arProp);
 ?>
 </div>
+
 <?
 }
 ?>
@@ -585,6 +586,7 @@ else
 	}
 ?>
 		</span>
+
 <?
 	}
 ?>
@@ -594,9 +596,33 @@ else
 unset($showAddBtn, $showBuyBtn);
 ?>
 </div>
+
 			<div class="clb"></div>
 		</div>
-
+		<div class="bx_rb">
+			<div class="item_info_section">
+				<?
+				if ('' != $arResult['DETAIL_TEXT'])
+				{
+					?>
+					<div class="bx_item_description">
+						<div class="bx_item_section_name_gray" style="border-bottom: 1px solid #f2f2f2;"><? echo GetMessage('FULL_DESCRIPTION'); ?></div>
+						<?
+						if ('html' == $arResult['DETAIL_TEXT_TYPE'])
+						{
+							echo $arResult['DETAIL_TEXT'];
+						}
+						else
+						{
+							?><p><? echo $arResult['DETAIL_TEXT']; ?></p><?
+						}
+						?>
+					</div>
+					<?
+				}
+				?>
+			</div>
+		</div>
 		<div class="bx_md">
 <div class="item_info_section">
 <?
@@ -658,30 +684,7 @@ else
 ?>
 </div>
 		</div>
-		<div class="bx_rb">
-<div class="item_info_section">
-<?
-if ('' != $arResult['DETAIL_TEXT'])
-{
-?>
-	<div class="bx_item_description">
-		<div class="bx_item_section_name_gray" style="border-bottom: 1px solid #f2f2f2;"><? echo GetMessage('FULL_DESCRIPTION'); ?></div>
-<?
-	if ('html' == $arResult['DETAIL_TEXT_TYPE'])
-	{
-		echo $arResult['DETAIL_TEXT'];
-	}
-	else
-	{
-		?><p><? echo $arResult['DETAIL_TEXT']; ?></p><?
-	}
-?>
-	</div>
-<?
-}
-?>
-</div>
-		</div>
+
 		<div class="bx_lb">
 <div class="tac ovh">
 </div>

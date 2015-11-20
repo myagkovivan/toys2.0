@@ -66,14 +66,14 @@
 				</li>
 				<?if(CUser::IsAuthorized()):?>
 					<li><strong><a href="/personal"><?=(CUser::GetFirstName())?CUser::GetFirstName():CUser::GetLogin()?></a></strong></li>
-					<li><a href="/?logout=yes">Выход</a>
+				<li><a href="/?logout=yes">Выход</a></ul>
 				<?else:?>
 					<li><a href="/auth"><strong>Вход</strong></a></li>
 					<li><a href="/auth//index.php?register=yes"><strong>Регистрация</strong></a></li>
 				<?endif;?>
-		</div>
+		
 
-
+			</div>
 
 		<div class="header-acount-basket">
 
@@ -133,6 +133,8 @@
 		"PATH" => ""
 	),
 	false
-);?>
+	);?>
 
 <div class="section">
+
+

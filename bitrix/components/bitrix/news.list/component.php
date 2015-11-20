@@ -9,18 +9,13 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 /** @global CDatabase $DB */
 /** @global CUser $USER */
 /** @global CMain $APPLICATION */
-
 /** @global CIntranetToolbar $INTRANET_TOOLBAR */
 global $INTRANET_TOOLBAR;
-
 use Bitrix\Main\Context;
 use Bitrix\Main\Type\DateTime;
-
 CPageOption::SetOptionString("main", "nav_page_in_session", "N");
-
 if(!isset($arParams["CACHE_TIME"]))
 	$arParams["CACHE_TIME"] = 36000000;
-
 $arParams["IBLOCK_TYPE"] = trim($arParams["IBLOCK_TYPE"]);
 if(strlen($arParams["IBLOCK_TYPE"])<=0)
 	$arParams["IBLOCK_TYPE"] = "news";
@@ -28,18 +23,15 @@ $arParams["IBLOCK_ID"] = trim($arParams["IBLOCK_ID"]);
 $arParams["PARENT_SECTION"] = intval($arParams["PARENT_SECTION"]);
 $arParams["INCLUDE_SUBSECTIONS"] = $arParams["INCLUDE_SUBSECTIONS"]!="N";
 $arParams["SET_LAST_MODIFIED"] = $arParams["SET_LAST_MODIFIED"]==="Y";
-
 $arParams["SORT_BY1"] = trim($arParams["SORT_BY1"]);
 if(strlen($arParams["SORT_BY1"])<=0)
 	$arParams["SORT_BY1"] = "ACTIVE_FROM";
 if(!preg_match('/^(asc|desc|nulls)(,asc|,desc|,nulls){0,1}$/i', $arParams["SORT_ORDER1"]))
 	$arParams["SORT_ORDER1"]="DESC";
-
 if(strlen($arParams["SORT_BY2"])<=0)
 	$arParams["SORT_BY2"] = "SORT";
 if(!preg_match('/^(asc|desc|nulls)(,asc|,desc|,nulls){0,1}$/i', $arParams["SORT_ORDER2"]))
 	$arParams["SORT_ORDER2"]="ASC";
-
 if(strlen($arParams["FILTER_NAME"])<=0 || !preg_match("/^[A-Za-z_][A-Za-z01-9_]*$/", $arParams["FILTER_NAME"]))
 {
 	$arrFilter = array();
@@ -50,31 +42,24 @@ else
 	if(!is_array($arrFilter))
 		$arrFilter = array();
 }
-
 $arParams["CHECK_DATES"] = $arParams["CHECK_DATES"]!="N";
-
 if(!is_array($arParams["FIELD_CODE"]))
 	$arParams["FIELD_CODE"] = array();
 foreach($arParams["FIELD_CODE"] as $key=>$val)
 	if(!$val)
 		unset($arParams["FIELD_CODE"][$key]);
-
 if(!is_array($arParams["PROPERTY_CODE"]))
 	$arParams["PROPERTY_CODE"] = array();
 foreach($arParams["PROPERTY_CODE"] as $key=>$val)
 	if($val==="")
 		unset($arParams["PROPERTY_CODE"][$key]);
-
 $arParams["DETAIL_URL"]=trim($arParams["DETAIL_URL"]);
-
 $arParams["NEWS_COUNT"] = intval($arParams["NEWS_COUNT"]);
 if($arParams["NEWS_COUNT"]<=0)
 	$arParams["NEWS_COUNT"] = 20;
-
 $arParams["CACHE_FILTER"] = $arParams["CACHE_FILTER"]=="Y";
 if(!$arParams["CACHE_FILTER"] && count($arrFilter)>0)
 	$arParams["CACHE_TIME"] = 0;
-
 $arParams["SET_TITLE"] = $arParams["SET_TITLE"]!="N";
 $arParams["SET_BROWSER_TITLE"] = (isset($arParams["SET_BROWSER_TITLE"]) && $arParams["SET_BROWSER_TITLE"] === 'N' ? 'N' : 'Y');
 $arParams["SET_META_KEYWORDS"] = (isset($arParams["SET_META_KEYWORDS"]) && $arParams["SET_META_KEYWORDS"] === 'N' ? 'N' : 'Y');
@@ -86,7 +71,6 @@ if(strlen($arParams["ACTIVE_DATE_FORMAT"])<=0)
 	$arParams["ACTIVE_DATE_FORMAT"] = $DB->DateFormatToPHP(CSite::GetDateFormat("SHORT"));
 $arParams["PREVIEW_TRUNCATE_LEN"] = intval($arParams["PREVIEW_TRUNCATE_LEN"]);
 $arParams["HIDE_LINK_WHEN_NO_DETAIL"] = $arParams["HIDE_LINK_WHEN_NO_DETAIL"]=="Y";
-
 $arParams["DISPLAY_TOP_PAGER"] = $arParams["DISPLAY_TOP_PAGER"]=="Y";
 $arParams["DISPLAY_BOTTOM_PAGER"] = $arParams["DISPLAY_BOTTOM_PAGER"]!="N";
 $arParams["PAGER_TITLE"] = trim($arParams["PAGER_TITLE"]);
@@ -96,7 +80,6 @@ $arParams["PAGER_DESC_NUMBERING"] = $arParams["PAGER_DESC_NUMBERING"]=="Y";
 $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"] = intval($arParams["PAGER_DESC_NUMBERING_CACHE_TIME"]);
 $arParams["PAGER_SHOW_ALL"] = $arParams["PAGER_SHOW_ALL"]=="Y";
 $arParams["CHECK_PERMISSIONS"] = $arParams["CHECK_PERMISSIONS"]!="N";
-
 if($arParams["DISPLAY_TOP_PAGER"] || $arParams["DISPLAY_BOTTOM_PAGER"])
 {
 	$arNavParams = array(
@@ -116,7 +99,6 @@ else
 	);
 	$arNavigation = false;
 }
-
 if (empty($arParams["PAGER_PARAMS_NAME"]) || !preg_match("/^[A-Za-z_][A-Za-z01-9_]*$/", $arParams["PAGER_PARAMS_NAME"]))
 {
 	$pagerParameters = array();
@@ -127,11 +109,9 @@ else
 	if (!is_array($pagerParameters))
 		$pagerParameters = array();
 }
-
 $arParams["USE_PERMISSIONS"] = $arParams["USE_PERMISSIONS"]=="Y";
 if(!is_array($arParams["GROUP_PERMISSIONS"]))
 	$arParams["GROUP_PERMISSIONS"] = array(1);
-
 $bUSER_HAVE_ACCESS = !$arParams["USE_PERMISSIONS"];
 if($arParams["USE_PERMISSIONS"] && isset($GLOBALS["USER"]) && is_object($GLOBALS["USER"]))
 {
@@ -145,7 +125,6 @@ if($arParams["USE_PERMISSIONS"] && isset($GLOBALS["USER"]) && is_object($GLOBALS
 		}
 	}
 }
-
 if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false: $USER->GetGroups()), $bUSER_HAVE_ACCESS, $arNavigation, $arrFilter, $pagerParameters)))
 {
 	if(!CModule::IncludeModule("iblock"))
@@ -198,10 +177,8 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 			"ACTIVE" => "Y",
 			"CHECK_PERMISSIONS" => $arParams['CHECK_PERMISSIONS'] ? "Y" : "N",
 		);
-
 		if($arParams["CHECK_DATES"])
 			$arFilter["ACTIVE_DATE"] = "Y";
-
 		$arParams["PARENT_SECTION"] = CIBlockFindTools::GetSectionID(
 			$arParams["PARENT_SECTION"],
 			$arParams["PARENT_SECTION_CODE"],
@@ -210,13 +187,11 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 				"IBLOCK_ID" => $arResult["ID"],
 			)
 		);
-
 		if($arParams["PARENT_SECTION"]>0)
 		{
 			$arFilter["SECTION_ID"] = $arParams["PARENT_SECTION"];
 			if($arParams["INCLUDE_SUBSECTIONS"])
 				$arFilter["INCLUDE_SUBSECTIONS"] = "Y";
-
 			$arResult["SECTION"]= array("PATH" => array());
 			$rsPath = CIBlockSection::GetNavChain($arResult["ID"], $arParams["PARENT_SECTION"]);
 			$rsPath->SetUrlTemplates("", $arParams["SECTION_URL"], $arParams["IBLOCK_URL"]);
@@ -226,7 +201,6 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 				$arPath["IPROPERTY_VALUES"] = $ipropValues->getValues();
 				$arResult["SECTION"]["PATH"][] = $arPath;
 			}
-
 			$ipropValues = new \Bitrix\Iblock\InheritedProperty\SectionValues($arResult["ID"], $arParams["PARENT_SECTION"]);
 			$arResult["IPROPERTY_VALUES"] = $ipropValues->getValues();
 		}
@@ -241,8 +215,7 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 		);
 		if(!array_key_exists("ID", $arSort))
 			$arSort["ID"] = "DESC";
-
-		$obParser = new CTextParser;
+		$obParser= CSmileGallery;
 		$arResult["ITEMS"] = array();
 		$arResult["ELEMENTS"] = array();
 		$rsElement = CIBlockElement::GetList($arSort, array_merge($arFilter, $arrFilter), false, $arNavParams, $arSelect);
@@ -250,7 +223,6 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 		while($obElement = $rsElement->GetNextElement())
 		{
 			$arItem = $obElement->GetFields();
-
 			$arButtons = CIBlock::GetPanelButtons(
 				$arItem["IBLOCK_ID"],
 				$arItem["ID"],
@@ -259,18 +231,14 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 			);
 			$arItem["EDIT_LINK"] = $arButtons["edit"]["edit_element"]["ACTION_URL"];
 			$arItem["DELETE_LINK"] = $arButtons["edit"]["delete_element"]["ACTION_URL"];
-
 			if($arParams["PREVIEW_TRUNCATE_LEN"] > 0)
 				$arItem["PREVIEW_TEXT"] = $obParser->html_cut($arItem["PREVIEW_TEXT"], $arParams["PREVIEW_TRUNCATE_LEN"]);
-
 			if(strlen($arItem["ACTIVE_FROM"])>0)
 				$arItem["DISPLAY_ACTIVE_FROM"] = CIBlockFormatProperties::DateFormat($arParams["ACTIVE_DATE_FORMAT"], MakeTimeStamp($arItem["ACTIVE_FROM"], CSite::GetDateFormat()));
 			else
 				$arItem["DISPLAY_ACTIVE_FROM"] = "";
-
 			$ipropValues = new \Bitrix\Iblock\InheritedProperty\ElementValues($arItem["IBLOCK_ID"], $arItem["ID"]);
 			$arItem["IPROPERTY_VALUES"] = $ipropValues->getValues();
-
 			if(isset($arItem["PREVIEW_PICTURE"]))
 			{
 				$arItem["PREVIEW_PICTURE"] = (0 < $arItem["PREVIEW_PICTURE"] ? CFile::GetFileArray($arItem["PREVIEW_PICTURE"]) : false);
@@ -297,12 +265,10 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 						$arItem["DETAIL_PICTURE"]["TITLE"] = $arItem["NAME"];
 				}
 			}
-
 			$arItem["FIELDS"] = array();
 			foreach($arParams["FIELD_CODE"] as $code)
 				if(array_key_exists($code, $arItem))
 					$arItem["FIELDS"][$code] = $arItem[$code];
-
 			if($bGetProperty)
 				$arItem["PROPERTIES"] = $obElement->GetProperties();
 			$arItem["DISPLAY_PROPERTIES"]=array();
@@ -317,7 +283,6 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 					$arItem["DISPLAY_PROPERTIES"][$pid] = CIBlockFormatProperties::GetDisplayValue($arItem, $prop, "news_out");
 				}
 			}
-
 			if ($arParams["SET_LAST_MODIFIED"])
 			{
 				$time = DateTime::createFromUserTime($arItem["TIMESTAMP_X"]);
@@ -327,11 +292,9 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 				)
 					$arResult["ITEMS_TIMESTAMP_X"] = $time;
 			}
-
 			$arResult["ITEMS"][] = $arItem;
 			$arResult["ELEMENTS"][] = $arItem["ID"];
 		}
-
 		$navComponentParameters = array();
 		if ($arParams["PAGER_BASE_LINK_ENABLE"] === "Y")
 		{
@@ -348,22 +311,19 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 					$pagerBaseLink = $arResult["SECTION"]["PATH"][0]["~SECTION_PAGE_URL"];
 				}
 				elseif (
-					$arItem["~LIST_PAGE_URL"]
+				$arItem["~LIST_PAGE_URL"]
 				)
 				{
 					$pagerBaseLink = $arItem["~LIST_PAGE_URL"];
 				}
 			}
-
 			if ($pagerParameters && isset($pagerParameters["BASE_LINK"]))
 			{
 				$pagerBaseLink = $pagerParameters["BASE_LINK"];
 				unset($pagerParameters["BASE_LINK"]);
 			}
-
 			$navComponentParameters["BASE_LINK"] = CHTTP::urlAddParams($pagerBaseLink, $pagerParameters, array("encode"=>true));
 		}
-
 		$arResult["NAV_STRING"] = $rsElement->GetPageNavStringEx(
 			$navComponentObject,
 			$arParams["PAGER_TITLE"],
@@ -399,7 +359,6 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"]==="N"? false:
 		);
 	}
 }
-
 if(isset($arResult["ID"]))
 {
 	$arTitleOptions = null;
@@ -419,10 +378,8 @@ if(isset($arResult["ID"]))
 					$arParams["PARENT_SECTION"],
 					array("SECTION_BUTTONS"=>false)
 				);
-
 				if($APPLICATION->GetShowIncludeAreas())
 					$this->AddIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $arButtons));
-
 				if(
 					is_array($arButtons["intranet"])
 					&& is_object($INTRANET_TOOLBAR)
@@ -433,7 +390,6 @@ if(isset($arResult["ID"]))
 					foreach($arButtons["intranet"] as $arButton)
 						$INTRANET_TOOLBAR->AddButton($arButton);
 				}
-
 				if($arParams["SET_TITLE"])
 				{
 					$arTitleOptions = array(
@@ -445,9 +401,7 @@ if(isset($arResult["ID"]))
 			}
 		}
 	}
-
 	$this->SetTemplateCachedData($arResult["NAV_CACHED_DATA"]);
-
 	if($arParams["SET_TITLE"])
 	{
 		if ($arResult["IPROPERTY_VALUES"] && $arResult["IPROPERTY_VALUES"]["SECTION_PAGE_TITLE"] != "")
@@ -455,19 +409,15 @@ if(isset($arResult["ID"]))
 		elseif(isset($arResult["NAME"]))
 			$APPLICATION->SetTitle($arResult["NAME"], $arTitleOptions);
 	}
-
 	if ($arResult["IPROPERTY_VALUES"])
 	{
 		if ($arParams["SET_BROWSER_TITLE"] === 'Y' && $arResult["IPROPERTY_VALUES"]["SECTION_META_TITLE"] != "")
 			$APPLICATION->SetPageProperty("title", $arResult["IPROPERTY_VALUES"]["SECTION_META_TITLE"], $arTitleOptions);
-
 		if ($arParams["SET_META_KEYWORDS"] === 'Y' && $arResult["IPROPERTY_VALUES"]["SECTION_META_KEYWORDS"] != "")
 			$APPLICATION->SetPageProperty("keywords", $arResult["IPROPERTY_VALUES"]["SECTION_META_KEYWORDS"], $arTitleOptions);
-
 		if ($arParams["SET_META_DESCRIPTION"] === 'Y' && $arResult["IPROPERTY_VALUES"]["SECTION_META_DESCRIPTION"] != "")
 			$APPLICATION->SetPageProperty("description", $arResult["IPROPERTY_VALUES"]["SECTION_META_DESCRIPTION"], $arTitleOptions);
 	}
-
 	if($arParams["INCLUDE_IBLOCK_INTO_CHAIN"] && isset($arResult["NAME"]))
 	{
 		if($arParams["ADD_SECTIONS_CHAIN"] && is_array($arResult["SECTION"]))
@@ -478,7 +428,6 @@ if(isset($arResult["ID"]))
 		else
 			$APPLICATION->AddChainItem($arResult["NAME"]);
 	}
-
 	if($arParams["ADD_SECTIONS_CHAIN"] && is_array($arResult["SECTION"]))
 	{
 		foreach($arResult["SECTION"]["PATH"] as $arPath)
@@ -489,11 +438,9 @@ if(isset($arResult["ID"]))
 				$APPLICATION->AddChainItem($arPath["NAME"], $arPath["~SECTION_PAGE_URL"]);
 		}
 	}
-
 	if ($arParams["SET_LAST_MODIFIED"] && $arResult["ITEMS_TIMESTAMP_X"])
 	{
 		Context::getCurrent()->getResponse()->setLastModified($arResult["ITEMS_TIMESTAMP_X"]);
 	}
-
 	return $arResult["ELEMENTS"];
 }
