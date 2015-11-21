@@ -43,12 +43,8 @@ $APPLICATION->SetTitle("Каталог");
 		"DETAIL_META_DESCRIPTION" => "-",
 		"DETAIL_META_KEYWORDS" => "SBREND",
 		"DETAIL_PROPERTY_CODE" => array(
-			0 => "SART",
-			1 => "SBREND",
-			2 => "SP",
-			3 => "SMAT",
-			4 => "SCOUTRY",
-			5 => "",
+			0 => "",
+			1 => "",
 		),
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DETAIL_SHOW_BASIS_PRICE" => "Y",
@@ -90,7 +86,7 @@ $APPLICATION->SetTitle("Каталог");
 		"LIST_META_DESCRIPTION" => "-",
 		"LIST_META_KEYWORDS" => "-",
 		"LIST_PROPERTY_CODE" => array(
-			0 => "SBREND",
+			0 => "",
 			1 => "",
 		),
 		"MESSAGES_PER_PAGE" => "10",
@@ -125,8 +121,7 @@ $APPLICATION->SetTitle("Каталог");
 		"PRICE_VAT_SHOW_VALUE" => "N",
 		"PRODUCT_ID_VARIABLE" => "id",
 		"PRODUCT_PROPERTIES" => array(
-			0 => "SBREND",
-			1 => "SP",
+			0 => "SP",
 		),
 		"PRODUCT_PROPS_VARIABLE" => "prop",
 		"PRODUCT_QUANTITY_VARIABLE" => "",

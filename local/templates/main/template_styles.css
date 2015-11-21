@@ -35,7 +35,10 @@ height: 110px;
 color: white;
 font-size: 70px;
 }
-.header-text a{text-decoration: none;}
+.header-text a{
+color:white;
+text-decoration: none;
+}
 
 .header-acount{
 margin:0;

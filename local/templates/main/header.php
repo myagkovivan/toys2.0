@@ -31,6 +31,7 @@
 	</div>
 	<div class="header-text">
 		<strong>
+			<?if($APPLICATION->GetCurPage(false) != SITE_DIR):?><a href="/"><?endif;?>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:main.include",
 				"",
@@ -40,7 +41,7 @@
 					"AREA_FILE_SUFFIX" => "inc",
 					"EDIT_TEMPLATE" => "",
 					"PATH" => SITE_TEMPLATE_PATH."/include_areas/name.php"
-				));?>
+				));?><?if($APPLICATION->GetCurPage(false) != SITE_DIR):?></a><?endif;?>
 		</strong>
 
 	</div>
